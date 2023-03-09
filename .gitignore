@@ -9,3 +9,6 @@ temp/
 
 # ignore results directory
 /results/
+
+# ignore pretrained
+/pretrained
