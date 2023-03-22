@@ -31,7 +31,7 @@ def stopword_filter(tokens):
 def lemma_filter(tokens):
     return WordNetLemmatizer(tokens)
 
-def analyze(text):
+def analyze_(text):
     tokens = lowercase_filter(tokens)
     tokens = tokenize(text)
     # tokens = punctuation_filter(tokens)

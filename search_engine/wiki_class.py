@@ -1,7 +1,7 @@
 from collections import Counter
 from dataclasses import dataclass
 
-from search_engine.analysis import analyze_
+from search_engine.analysis import *
 
 @dataclass
 class Abstract:
