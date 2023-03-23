@@ -1,7 +1,7 @@
 import math
 
 from .timing import timing
-from .analysis import analyze
+from .analysis import analyze_
 
 class Index:
     def __init__(self):
