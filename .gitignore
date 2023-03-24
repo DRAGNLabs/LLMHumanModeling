@@ -6,12 +6,15 @@ temp/
 
 # ignore venv directory
 /env/
+/venv/
 
 # ignore results directory
 /results/
 
 # ignore pretrained
 /pretrained
+
+
 
 # ignore downloaded wiki data
 /search_engine/data/wiki/
