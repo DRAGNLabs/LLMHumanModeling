@@ -18,11 +18,11 @@ def index_documents(documents, index):
 if __name__ == '__main__':
     # this will only download the xml dump if you don't have a copy already;
     # just delete the file if you want a fresh copy
-    if not os.path.exists('search_engine/data/enwiki-latest-abstract.xml.gz'):
+    if not os.path.exists('search_engine/data/wiki/enwiki-latest-abstract.xml.gz'):
         download_wiki_abstracts()
 
     index = index_documents(load_documents(), Index())
-    print(f'Index conins {len(index.documents)} documents')
+    print(f'Index contains {len(index.documents)} documents')
 
     index.search('London Beer Flood', search_type='AND')
     index.search('London Beer Flood', search_type='OR')
