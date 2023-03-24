@@ -1,5 +1,5 @@
 import os.path
-import requests
+# import requests
 
 from search_engine.get_wikimedia import download_wiki_abstracts
 from search_engine.build_wiki_objects import load_documents
