@@ -17,9 +17,9 @@ def timing(method):
     snore took 5.0011749267578125 seconds
     """
     def timed(*args, **kwargs):
-        start = time.time()
+        start = time()
         result = method(*args, **kwargs)
-        end = time.time()
+        end = time()
 
         execution_time = end - start
         if execution_time < 0.001:
