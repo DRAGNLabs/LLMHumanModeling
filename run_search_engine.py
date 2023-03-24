@@ -22,7 +22,7 @@ if __name__ == '__main__':
         download_wiki_abstracts()
 
     index = index_documents(load_documents(), Index())
-    print(f'Index contains {len(index.documents)} documents')
+    print(f'Index conins {len(index.documents)} documents')
 
     index.search('London Beer Flood', search_type='AND')
     index.search('London Beer Flood', search_type='OR')

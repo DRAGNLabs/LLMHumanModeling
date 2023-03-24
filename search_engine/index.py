@@ -1,8 +1,7 @@
 import math
 
-from timing import timing
-from analysis import analyze_
-
+from .timing import timing
+import analysis
 class Index:
     def __init__(self):
         self.index = {}
@@ -13,7 +12,7 @@ class Index:
             self.documents[document.ID] = document
             document.analyze()
 
-        for token in analyze(document.fulltext):
+        for token in analysis.analyze_(document.fulltext):
             if token not in self.index:
                 self.index[token] = set()
             self.index[token].add(document.ID)
@@ -43,7 +42,7 @@ class Index:
         if search_type not in ('AND', 'OR'):
             return []
 
-        analyzed_query = analyze(query)
+        analyzed_query = analysis.analyze(query)
         results = self._results(analyzed_query)
         if search_type == 'AND':
             # all tokens must be in the document
