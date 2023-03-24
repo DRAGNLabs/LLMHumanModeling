@@ -2,7 +2,7 @@ import gzip
 from lxml import etree  # Can't find this package; pip install lxml?
 from time import time
 
-from .wiki_class import Abstract  # local .py file
+from . import wiki_class  # local .py file
 
 def load_documents():
     start = time()
@@ -16,7 +16,7 @@ def load_documents():
             url = element.findtext('./url')
             abstract = element.findtext('./abstract')
 
-            yield Abstract(ID=doc_id, title=title, url=url, abstract=abstract)
+            yield wiki_class.Abstract(ID=doc_id, title=title, url=url, abstract=abstract)
 
             doc_id += 1
             # the `element.clear()` call will explicitly free up the memory
