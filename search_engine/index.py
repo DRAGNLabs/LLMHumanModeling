@@ -1,8 +1,7 @@
 import math
 
 from .timing import timing
-from .analysis import analyze_
-
+from . import analysis
 class Index:
     def __init__(self):
         self.index = {}
@@ -13,7 +12,7 @@ class Index:
             self.documents[document.ID] = document
             document.analyze()
 
-        for token in analyze_(document.fulltext):
+        for token in analysis.analyze_(document.fulltext):
             if token not in self.index:
                 self.index[token] = set()
             self.index[token].add(document.ID)
