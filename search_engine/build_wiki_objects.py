@@ -2,12 +2,12 @@ import gzip
 from lxml import etree  # Can't find this package; pip install lxml?
 from time import time
 
-from search_engine.wiki_class import Abstract # local .py file
+from .wiki_class import Abstract  # local .py file
 
 def load_documents():
     start = time()
     # open a filehandle to the gzipped Wikipedia dump
-    with gzip.open('data/enwiki.latest-abstract.xml.gz', 'rb') as f:
+    with gzip.open('../data/enwiki.latest-abstract.xml.gz', 'rb') as f:
         doc_id = 1
         # iterparse will yield the entire `doc` element once it finds the
         # closing `</doc>` tag
