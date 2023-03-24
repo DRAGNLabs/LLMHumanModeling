@@ -5,7 +5,7 @@ from time import time
 from search_engine.wiki_class import Abstract # local .py file
 
 def load_documents():
-    start = time.time()
+    start = time()
     # open a filehandle to the gzipped Wikipedia dump
     with gzip.open('data/enwiki.latest-abstract.xml.gz', 'rb') as f:
         doc_id = 1
@@ -22,5 +22,5 @@ def load_documents():
             # the `element.clear()` call will explicitly free up the memory
             # used to store the element
             element.clear()
-    end = time.time()
+    end = time()
     print(f'Parsing XML took {round(end - start, 3)} seconds')
