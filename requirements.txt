@@ -19,7 +19,7 @@ huggingface-hub==0.10.1
 idna==3.4
 joblib==1.2.0
 lupyne[graphql,rest]
-lxml==4.5.2
+lxml==4.9.2
 multidict==6.0.2
 multiprocess==0.70.13
 nltk==3.8.1
