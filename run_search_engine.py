@@ -13,6 +13,7 @@ def index_documents(documents, index):
         if i % 5000 == 0:
             print(f'Indexed {i} documents', end='\r')
     return index
+    x = 0  # test
 
 
 if __name__ == '__main__':
