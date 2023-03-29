@@ -17,7 +17,7 @@ temp/
 
 
 # ignore downloaded wiki data
-/search_engine/data/wiki/
+/data/wiki/
 
 # ignore pycache
-/search_engine/__pycache__
+__pycache__
