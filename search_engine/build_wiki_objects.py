@@ -7,7 +7,7 @@ from . import wiki_class  # local .py file
 def load_documents():
     start = time()
     # open a filehandle to the gzipped Wikipedia dump
-    with gzip.open('../data/enwiki.latest-abstract.xml.gz', 'rb') as f:
+    with gzip.open('../data/wiki/enwiki.latest-abstract.xml.gz', 'rb') as f:
         doc_id = 1
         # iterparse will yield the entire `doc` element once it finds the
         # closing `</doc>` tag
