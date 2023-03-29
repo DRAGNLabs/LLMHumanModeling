@@ -2,6 +2,9 @@ import re
 import string
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
+from nltk import download as nltk_download
+
+nltk_download('punkt')
 
 # NLTKs English stop words:
 # https://gist.github.com/sebleier/554280#:~:text=%5B%22i%22%2C%20%22me%22%2C%20%22my,don%22%2C%20%22should%22%2C%20%22now%22%5D
@@ -32,8 +35,8 @@ def lemma_filter(tokens):
     return WordNetLemmatizer(tokens)
 
 def analyze_(text):
-    tokens = lowercase_filter(tokens)
     tokens = tokenize(text)
+    tokens = lowercase_filter(tokens)
     # tokens = punctuation_filter(tokens)
     tokens = stopword_filter(tokens)
     # tokens = stem_filter(tokens)
