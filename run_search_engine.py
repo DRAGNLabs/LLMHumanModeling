@@ -1,3 +1,4 @@
+import json
 import os.path
 # import requests
 
@@ -23,6 +24,8 @@ if __name__ == '__main__':
 
     index = index_documents(load_documents(), Index())
     print(f'Index contains {len(index.documents)} documents')
+    with open('index.json', 'w') as f:
+        json.dump(index, f, indent=4)
 
     index.search('London Beer Flood', search_type='AND')
     index.search('London Beer Flood', search_type='OR')

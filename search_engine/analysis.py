@@ -5,6 +5,7 @@ from nltk.tokenize import word_tokenize
 from nltk import download as nltk_download
 
 nltk_download('punkt')
+nltk_download('wordnet')
 
 # NLTKs English stop words:
 # https://gist.github.com/sebleier/554280#:~:text=%5B%22i%22%2C%20%22me%22%2C%20%22my,don%22%2C%20%22should%22%2C%20%22now%22%5D
@@ -32,7 +33,8 @@ def stopword_filter(tokens):
 #     return STEMMER.stemWords(tokens)
 
 def lemma_filter(tokens):
-    return WordNetLemmatizer(tokens)
+    lemmatizer = WordNetLemmatizer()
+    return lemmatizer.lemmatize(tokens)
 
 def analyze_(text):
     tokens = tokenize(text)
@@ -40,6 +42,6 @@ def analyze_(text):
     # tokens = punctuation_filter(tokens)
     tokens = stopword_filter(tokens)
     # tokens = stem_filter(tokens)
-    tokens = lemma_filter(tokens)
+    tokens = [lemma_filter(token) for token in tokens]
 
     return [token for token in tokens if token]

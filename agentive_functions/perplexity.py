@@ -3,7 +3,7 @@ from tqdm import tqdm
 
 # from transformers import GPT2LMHeadModel, GPT2TokenizerFast
 
-device = "cuda"
+device = "cpu"
 # model_id = "gpt2-large"
 # model = GPT2LMHeadModel.from_pretrained(model_id).to(device)
 # tokenizer = GPT2TokenizerFast.from_pretrained(model_id)
@@ -17,7 +17,7 @@ def get_ppl(model, tokenizer, text) -> float:
     encodings = tokenizer(text, return_tensors="pt")
     
     max_length = model.config.n_positions
-    stride = 512
+    stride = 50
     seq_len = encodings.input_ids.size(1)
 
     nlls = []

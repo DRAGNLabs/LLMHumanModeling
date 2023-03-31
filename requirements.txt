@@ -50,9 +50,7 @@ strawberry-graphql>=0.84.4
 sortedcontainers==2.4.0
 threadpoolctl==3.1.0
 tokenizers==0.13.1
-torch==1.12.1
-torchaudio==0.12.1
-torchvision==0.13.1
+torch==1.13.0
 tqdm==4.64.1
 transformers==4.23.1
 trio==0.22.0
