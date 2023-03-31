@@ -1,5 +1,14 @@
 ## [Project Wiki](https://github.com/DrewGalbraith/Agentive_LLM_CL_Wiki/wiki)
 To learn about the project, or refer back to notes, go to the project's externally hosted [wiki page](https://github.com/DrewGalbraith/Agentive_LLM_CL_Wiki/wiki).
-## Usage
 
-Use the run_clm.py file to run the code. The original file can be found at from HuggingFace.
+## A Tentative Design / Todo List
+
+1. G: Setup GPT2-small for finetuning
+2. D: Function to Grab random doc from wiki pages (Function S)
+3. D: Funtion to prep file for GPT-2 submission; Read [this article](https://blog.floydhub.com/tokenization-nlp/) on byte-pair word tokenizing. 
+4. Train on 1/x portion of doc
+5. ~~G: Function to eval perplexity.~~
+6. G: Eval continuance (Function F)
+7. D: function to jump back to either 4 & 5 or 2 (Function S)
+8. D: Function to log visited files, perplexity levels 
+
