@@ -1,11 +1,13 @@
 import math
-
+from .wiki_class import Abstract
 from .timing import timing
 from . import analysis
+from collections import defaultdict
 class Index:
     def __init__(self):
         self.index = {}  # k(type):v(type)  == token(str) : doc_ids(list[int])
-        self.documents = {}  # k(type):v(type) == doc_id(int) : article_abstract (wiki_class.Abstract)
+        self.documents = {}  # k(type):v(type) == doc_id(int) : article_abstract(wiki_class.Abstract)
+        self.log = defaultdict(int)  # k(type):v(type) == doc_id(int) : fraction_consumed(float)
 
     def index_document(self, document)-> None:
         if document.ID not in self.documents:
@@ -67,3 +69,20 @@ class Index:
                 score += tf * idf
             results.append((document, score))
         return sorted(results, key=lambda doc: doc[1], reverse=True)
+    
+    def get__rand_doc(self, percent:float)-> Abstract:
+        """ percent: float [0, 1] -> e.g. .2, .5 """
+
+        cap = len(self.documents) 
+        r_idx = (0, cap-1)  # cap-1 bc randint "includes both endpoints."
+        abs_2_return = self.documents[r_idx]
+        curr_perc = self.log[r_idx] % 1
+        if curr_perc+percent <= 1:
+            # grab the portion of the Abstract for current_perc through current_perc+percent
+            # split abstract and doc into 2 different functions?? yes, allows for implementing or not that percentage function, 
+            # and better abstraction of tasks
+            x = 0
+
+        self.log[randint] += percent
+
+        return abs_2_return
