@@ -17,11 +17,12 @@ STOPWORDS += ["#", "&", "|", "!", "(", ")", "-", "[", "]", "{", "}", ";", "*", "
 # PUNCTUATION = re.compile('[%s]' % re.escape(string.punctuation))
 # STEMMER = Stemmer.Stemmer('english')
 
-def lowercase_filter(tokens):
-    return [token.lower() for token in tokens]
 
 def tokenize(text: str)-> list[str]:
     return word_tokenize(text) # text.split()  # he had a white-sace tokenizer that I found to be weak
+
+def lowercase_filter(tokens):
+    return [token.lower() for token in tokens]
 
 # def punctuation_filter(tokens):
 #     return [PUNCTUATION.sub('', token) for token in tokens]

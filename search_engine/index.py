@@ -76,11 +76,14 @@ class Index:
         cap = len(self.documents, percent=1.0) 
         r_idx = (0, cap-1)  # cap-1 bc randint "includes both endpoints."
         abs_2_return = self.documents[r_idx]  # a wiki_class abstract
-
         curr_perc = self.log[r_idx] % 1
+
         if curr_perc+percent <= 1:
             abs_txt = abs_2_return.get_abs_percent(curr_perc, percent)
-        
+        else:  # wrap around and grab the beginning again
+            left_overs = percent - (1 - curr_perc)
+            abs_txt = abs_2_return.getabs_percent(curr_perc, 1.0)
+            abs_text += abs_2_return.getabs_percent(0.0, left_overs)
 
         self.log[r_idx] += percent
         return abs_txt
