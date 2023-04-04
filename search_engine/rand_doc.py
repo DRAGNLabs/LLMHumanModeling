@@ -8,7 +8,7 @@ def get_num(some_index:Index)-> int:
 
 def log_visits(file_name:str, id:int)-> None:
     with open(f"./{file_name}.csv", mode="a", encoding="utf8") as outf:
-        outf.write("f")
+        outf.write(id)
 
 def get_doc(index:Index)-> Abstract:
     r_idx = get_num(some_index=index)
