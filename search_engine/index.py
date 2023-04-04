@@ -7,7 +7,7 @@ class Index:
         self.index = {}
         self.documents = {}
 
-    def index_document(self, document:wiki_)-> None:
+    def index_document(self, document)-> None:
         if document.ID not in self.documents:
             self.documents[document.ID] = document
             document.analyze()
@@ -17,20 +17,20 @@ class Index:
                 self.index[token] = set()
             self.index[token].add(document.ID)
 
-    def document_frequency(self, token):
+    def document_frequency(self, token:str)->int:
         return len(self.index.get(token, set()))
 
-    def inverse_document_frequency(self, token):
+    def inverse_document_frequency(self, token:str)-> float:
         # Manning, Hinrich and Schütze use log10, so we do too, even though it
         # doesn't really matter which log we use anyway
         # https://nlp.stanford.edu/IR-book/html/htmledition/inverse-document-frequency-1.html
         return math.log10(len(self.documents) / self.document_frequency(token))
 
-    def _results(self, analyzed_query):
+    def _results(self, analyzed_query:list[str])->list[any]:
         return [self.index.get(token, set()) for token in analyzed_query]
 
     @timing
-    def search(self, query, search_type='AND', rank=False):
+    def search(self, query, search_type='AND', rank=False)->list[any]:
         """
         Search; this will return documents that contain words from the query,
         and rank them if requested (sets are fast, but unordered).
@@ -42,7 +42,7 @@ class Index:
         if search_type not in ('AND', 'OR'):
             return []
 
-        analyzed_query = analyze_(query)
+        analyzed_query = analysis.analyze_(query)
         results = self._results(analyzed_query)
         if search_type == 'AND':
             # all tokens must be in the document
