@@ -4,8 +4,8 @@ from .timing import timing
 from . import analysis
 class Index:
     def __init__(self):
-        self.index = {}
-        self.documents = {}
+        self.index = {}  # k(type):v(type)  == token(str) : doc_ids(list[int])
+        self.documents = {}  # k(type):v(type) == doc_id(int) : article_abstract (wiki_class.Abstract)
 
     def index_document(self, document)-> None:
         if document.ID not in self.documents:
