@@ -70,10 +70,10 @@ class Index:
             results.append((document, score))
         return sorted(results, key=lambda doc: doc[1], reverse=True)
     
-    def get__rand_doc(self, percent:float)-> str:
+    def get__rand_doc(self, percent:float=1.0)-> str:
         """ percent: float [0, 1] -> e.g. .2, .5 """
 
-        cap = len(self.documents, percent=1.0) 
+        cap = len(self.documents, percent) 
         r_idx = (0, cap-1)  # cap-1 bc randint "includes both endpoints."
         abs_2_return = self.documents[r_idx]  # a wiki_class abstract
         curr_perc = self.log[r_idx] % 1
