@@ -20,23 +20,23 @@ STOPWORDS += ["#", "&", "|", "!", "(", ")", "-", "[", "]", "{", "}", ";", "*", "
 def lowercase_filter(tokens):
     return [token.lower() for token in tokens]
 
-def tokenize(text):
+def tokenize(text: str)-> list[str]:
     return word_tokenize(text) # text.split()  # he had a white-sace tokenizer that I found to be weak
 
 # def punctuation_filter(tokens):
 #     return [PUNCTUATION.sub('', token) for token in tokens]
 
-def stopword_filter(tokens):
+def stopword_filter(tokens: list[str])-> list[str]:
     return [token for token in tokens if token not in STOPWORDS]
 
 # def stem_filter(tokens):   # replaced with lemmatizer
 #     return STEMMER.stemWords(tokens)
 
-def lemma_filter(tokens):
+def lemma_filter(tokens: list[str])-> WordNetLemmatizer:
     lemmatizer = WordNetLemmatizer()
     return lemmatizer.lemmatize(tokens)
 
-def analyze_(text):
+def analyze_(text:str)-> list[str]:
     tokens = tokenize(text)
     tokens = lowercase_filter(tokens)
     # tokens = punctuation_filter(tokens)

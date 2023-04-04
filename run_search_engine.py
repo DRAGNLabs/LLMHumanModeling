@@ -8,7 +8,7 @@ from search_engine.timing import timing
 from search_engine.index import Index
 
 @timing
-def index_documents(documents, index):
+def index_documents(documents, index: Index)-> Index:
     for i, document in enumerate(documents):
         index.index_document(document)
         if i % 5000 == 0:

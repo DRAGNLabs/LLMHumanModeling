@@ -4,7 +4,7 @@ from time import time
 
 from . import wiki_class  # local .py file
 
-def load_documents():
+def load_documents()-> wiki_class.Abstract:
     start = time()
     # open a filehandle to the gzipped Wikipedia dump
     with gzip.open('./data/wiki/enwiki-latest-abstract.xml.gz', 'rb') as f:

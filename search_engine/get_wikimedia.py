@@ -1,6 +1,6 @@
 import requests
 
-def download_wiki_abstracts():
+def download_wiki_abstracts()-> None:
     url = 'https://dumps.wikimedia.org/enwiki/latest/enwiki-latest-abstract.xml.gz'
     with requests.get(url, stream=True) as q:  # See below comment
         q.raise_for_status()

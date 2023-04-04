@@ -7,7 +7,7 @@ class Index:
         self.index = {}
         self.documents = {}
 
-    def index_document(self, document):
+    def index_document(self, document:wiki_)-> None:
         if document.ID not in self.documents:
             self.documents[document.ID] = document
             document.analyze()

@@ -12,11 +12,10 @@ class Abstract:
     url: str
 
     @property
-    def fulltext(self):
+    def fulltext(self)-> str:
         return ' '.join([self.title, self.abstract])
 
-    def analyze(self):
-        self.term_frequencies = Counter(analyze_(self.fulltext)) # I added the underscore to associate it with the import, assuming it not to be recursive.
-
-    def term_frequency(self, term):
+    def analyze(self)-> None:
+        self.term_frequencies = Counter(analyze_(self.fulltext))
+    def term_frequency(self, term:str)->int:
         return self.term_frequencies.get(term, 0)
