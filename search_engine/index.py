@@ -1,5 +1,5 @@
 import math
-from .wiki_class import Abstract
+from .wiki_class import Abstract, get_abs_percent
 from .timing import timing
 from . import analysis
 from collections import defaultdict
@@ -70,19 +70,19 @@ class Index:
             results.append((document, score))
         return sorted(results, key=lambda doc: doc[1], reverse=True)
     
-    def get__rand_doc(self, percent:float)-> Abstract:
+    def get__rand_doc(self, percent:float)-> str:
         """ percent: float [0, 1] -> e.g. .2, .5 """
 
-        cap = len(self.documents) 
+        cap = len(self.documents, percent=1.0) 
         r_idx = (0, cap-1)  # cap-1 bc randint "includes both endpoints."
-        abs_2_return = self.documents[r_idx]
+        abs_2_return = self.documents[r_idx]  # a wiki_class abstract
+
         curr_perc = self.log[r_idx] % 1
         if curr_perc+percent <= 1:
-            # grab the portion of the Abstract for current_perc through current_perc+percent
-            # split abstract and doc into 2 different functions?? yes, allows for implementing or not that percentage function, 
-            # and better abstraction of tasks
-            x = 0
+            abs_txt = abs_2_return.get_abs_percent(curr_perc, percent)
+        
 
-        self.log[randint] += percent
+        self.log[r_idx] += percent
+        return abs_txt
 
-        return abs_2_return
+    
