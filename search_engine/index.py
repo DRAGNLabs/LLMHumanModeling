@@ -74,7 +74,7 @@ class Index:
         """ percent: float [0, 1] -> e.g. .2, .5 """
 
         cap = len(self.documents, percent) 
-        r_idx = (0, cap-1)  # cap-1 bc randint "includes both endpoints."
+        r_idx = (1, cap-1)  # cap-1 bc randint "includes both endpoints."
         abs_2_return = self.documents[r_idx]  # a wiki_class abstract
         curr_perc = self.log[r_idx] % 1
 
