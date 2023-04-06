@@ -1,5 +1,5 @@
 import math
-from .wiki_class import Abstract, get_abs_percent
+from .wiki_class import Abstract
 from .timing import timing
 from . import analysis
 from collections import defaultdict

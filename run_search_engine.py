@@ -22,9 +22,13 @@ if __name__ == '__main__':
     if not os.path.exists('./data/wiki/enwiki-latest-abstract.xml.gz'):
         download_wiki_abstracts()
 
-    index = index_documents(load_documents(), Index())
+    index = {}
+    if os.path.exists('./cache/index.json'):
+        index = json.load(open('index.json'))
+    else:
+        index = index_documents(load_documents(), Index())
     print(f'Index contains {len(index.documents)} documents')
-    with open('index.json', 'w') as f:
+    with open('./cache/index.json', 'w') as f:
         json.dump(index, f, indent=4)
 
     index.search('London Beer Flood', search_type='AND')
