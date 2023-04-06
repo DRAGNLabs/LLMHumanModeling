@@ -26,12 +26,12 @@ if __name__ == '__main__':
 
     c_index = {}
     documents = []
-    if os.path.exists('./search_engine/cache/index.json'):
+    if os.path.exists('./search_engine/cache/index.json') and os.path.exists('./search_engine/cache/documents.json'):
         c_index = json.load(open('./search_engine/cache/index.json'))
         c_index = Index(c_index[0], c_index[1])
-    if os.path.exists('./search_engine/cache/documents.json'):
         documents = json.load(open('./search_engine/cache/documents.json'))
         documents = [Abstract(ID, title, abtract, url) for ID, title, abtract, url in c_index]
+        search_index = Index(documents, c_index)
     else:
         search_index = index_documents(load_documents(), Index())
     print(f'Index contains {len(search_index.documents)} documents')
