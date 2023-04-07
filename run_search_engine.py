@@ -34,7 +34,7 @@ if __name__ == '__main__':
         search_index = Index(documents, c_index)
     else:
         search_index = index_documents(load_documents(), Index())
-    print(f'Index contains {len(search_index.documents)} documents')
+    print(f'Index contains {len(search_index.documents)} documents.')
     if not os.path.exists('./search_engine/cache'):
         os.mkdir('./search_engine/cache')
     with open('./search_engine/cache/search_index.json', 'w') as f:
@@ -43,7 +43,8 @@ if __name__ == '__main__':
     with open('./search_engine/cache/documents.json', 'w') as f:
         json.dump([[doc.ID, doc.title, doc.abstract, doc.url] for doc in search_index.documents.values()], f, indent=4)
 
-    search_index.search('London Beer Flood', search_type='AND')
-    search_index.search('London Beer Flood', search_type='OR')
-    search_index.search('London Beer Flood', search_type='AND', rank=True)
-    search_index.search('London Beer Flood', search_type='OR', rank=True)
+## Example searches
+    # search_index.search('London Beer Flood', search_type='AND')
+    # search_index.search('London Beer Flood', search_type='OR')
+    # search_index.search('London Beer Flood', search_type='AND', rank=True)
+    # search_index.search('London Beer Flood', search_type='OR', rank=True)
