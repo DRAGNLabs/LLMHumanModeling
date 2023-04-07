@@ -1,3 +1,9 @@
+# TODO: - make extraction and reinstantiation code into functions (~ln 23- ln 50)
+#       - fix mutable default parameter types (tuples).
+#       - Nested indices? What's going on?
+#       
+
+
 import json
 import os.path
 # import requests
@@ -26,17 +32,20 @@ if __name__ == '__main__':
 
     c_index = {}
     documents = []
-    if os.path.exists('./search_engine/cache/index.json') and os.path.exists('./search_engine/cache/documents.json'):
+    if os.path.exists('./search_engine/cache/index.json') and os.path.exists('./search_engine/cache/documents.json'):  # Load existing index
         c_index = json.load(open('./search_engine/cache/index.json'))
         c_index = Index(c_index[0], c_index[1])
         documents = json.load(open('./search_engine/cache/documents.json'))
         documents = [Abstract(ID, title, abtract, url) for ID, title, abtract, url in c_index]
         search_index = Index(documents, c_index)
-    else:
+    else:  # Create index
         search_index = index_documents(load_documents(), Index())
+
     print(f'Index contains {len(search_index.documents)} documents.')
-    if not os.path.exists('./search_engine/cache'):
+
+    if not os.path.exists('./search_engine/cache'):  # Make a 'cache' directory
         os.mkdir('./search_engine/cache')
+
     with open('./search_engine/cache/search_index.json', 'w') as f:
         json_serializable_index = {index_str: list(set_ints) for index_str, set_ints in search_index.index.items()}
         json.dump(json_serializable_index, f, indent=4)
