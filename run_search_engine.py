@@ -13,6 +13,7 @@ from search_engine.build_wiki_objects import load_documents
 from search_engine.timing import timing
 from search_engine.index import Index
 from search_engine.wiki_class import Abstract
+from scoping import scoping
 
 
 @timing
@@ -30,16 +31,18 @@ if __name__ == '__main__':
     if not os.path.exists('./data/wiki/truncated-enwiki-latest-abstract.xml.gz'):
         download_wiki_abstracts()
 
-    c_index = {}
-    documents = []
-    if os.path.exists('./search_engine/cache/index.json') and os.path.exists('./search_engine/cache/documents.json'):  # Load existing index
-        c_index = json.load(open('./search_engine/cache/index.json'))
-        c_index = Index(c_index[0], c_index[1])
-        documents = json.load(open('./search_engine/cache/documents.json'))
-        documents = [Abstract(ID, title, abtract, url) for ID, title, abtract, url in c_index]
-        search_index = Index(documents, c_index)
-    else:  # Create index
-        search_index = index_documents(load_documents(), Index())
+    search_index = Index()
+    
+    with scoping():
+        raw_indexes = {}
+        raw_documents = []
+        if os.path.exists('./search_engine/cache/index.json') and os.path.exists('./search_engine/cache/documents.json'):  # Load existing index
+            raw_indexes = json.load(open('./search_engine/cache/index.json'))
+            raw_documents = json.load(open('./search_engine/cache/documents.json'))
+            raw_documents = [Abstract(ID, title, abtract, url) for ID, title, abtract, url in raw_indexes]
+            search_index = Index(raw_documents, raw_indexes)
+        else:  # Create index
+            search_index = index_documents(load_documents(), Index())
 
     print(f'Index contains {len(search_index.documents)} documents.')
 
