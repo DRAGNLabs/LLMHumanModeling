@@ -1,9 +1,3 @@
-# TODO: - make extraction and reinstantiation code into functions (~ln 23- ln 50)
-#       - fix mutable default parameter types (tuples).
-#       - Nested indices? What's going on?
-#       
-
-
 import json
 import os.path
 # import requests
