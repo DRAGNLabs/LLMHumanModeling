@@ -25,8 +25,7 @@ if __name__ == '__main__':
     if not os.path.exists('./data/wiki/enwiki-latest-abstract.xml.gz'):
         download_wiki_abstracts()
 
-    search_index: Index
-    
+    search_index: Index  # Declare var for 'scoping()'
     with scoping(): # Loads indexes and documents from cache if they exist, otherwise creates them
         if os.path.exists('./search_engine/cache/index.json') and os.path.exists('./search_engine/cache/documents.json'):  # Load existing index
             raw_indexes: dict = json.load(open('./search_engine/cache/index.json'))
