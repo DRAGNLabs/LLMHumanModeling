@@ -28,23 +28,25 @@ def index_documents(documents, index: Index)-> Index:
 if __name__ == '__main__':
     # this will only download the xml dump if you don't have a copy already;
     # just delete the file if you want a fresh copy
-    if not os.path.exists('./data/wiki/truncated-enwiki-latest-abstract.xml.gz'):
+    if not os.path.exists('./data/wiki/enwiki-latest-abstract.xml.gz'):
         download_wiki_abstracts()
 
-    search_index = Index()
+    search_index: Index
     
-    with scoping():
-        raw_indexes = {}
-        raw_documents = []
+    with scoping(): # Loads indexes and documents from cache if they exist, otherwise creates them
         if os.path.exists('./search_engine/cache/index.json') and os.path.exists('./search_engine/cache/documents.json'):  # Load existing index
-            raw_indexes = json.load(open('./search_engine/cache/index.json'))
-            raw_documents = json.load(open('./search_engine/cache/documents.json'))
+            raw_indexes: dict = json.load(open('./search_engine/cache/index.json'))
+            raw_documents: list = json.load(open('./search_engine/cache/documents.json'))
             raw_documents = [Abstract(ID, title, abtract, url) for ID, title, abtract, url in raw_indexes]
             search_index = Index(raw_documents, raw_indexes)
         else:  # Create index
             search_index = index_documents(load_documents(), Index())
+        
+        scoping.keep('search_index') # passes search_index to the enclosing scope (otherwise the variable would refer to the uninitialized Index() object)
 
     print(f'Index contains {len(search_index.documents)} documents.')
+    print(search_index.index)
+    print(search_index.documents)
 
     if not os.path.exists('./search_engine/cache'):  # Make a 'cache' directory
         os.mkdir('./search_engine/cache')

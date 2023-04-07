@@ -5,9 +5,9 @@ from . import analysis
 from collections import defaultdict
 class Index:
     def __init__(self, documents:dict[int, Abstract] = {}, index:dict[str, set[int]] = {}):
-        self.index = {} if len(index) == 0 else index  # k(type):v(type)  == token(str) : doc_ids(list[int])
-        self.documents = {} if len(documents) == 0 else documents# k(type):v(type) == doc_id(int) : article_abstract(wiki_class.Abstract)
-        self.log = defaultdict(int)  # k(type):v(type) == doc_id(int) : fraction_consumed(float)
+        self.index: dict = {} if len(index) == 0 else index  # k(type):v(type)  == token(str) : doc_ids(list[int])
+        self.documents: dict = {} if len(documents) == 0 else documents# k(type):v(type) == doc_id(int) : article_abstract(wiki_class.Abstract)
+        self.log: defaultdict = defaultdict(int)  # k(type):v(type) == doc_id(int) : fraction_consumed(float)
 
     def index_document(self, document)-> None:
         if document.ID not in self.documents:
