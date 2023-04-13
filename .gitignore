@@ -14,7 +14,8 @@ temp/
 # ignore pretrained
 /pretrained
 
-
+# ignore index and documents
+./search_engine/cache/
 
 # ignore downloaded wiki data
 /data/wiki/
