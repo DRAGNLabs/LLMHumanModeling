@@ -44,14 +44,15 @@ if __name__ == '__main__':
     if not os.path.exists('./search_engine/cache'):  # Make a 'cache' directory
         os.mkdir('./search_engine/cache')
 
-    with open('./search_engine/cache/search_index.json', 'w') as f:
+    fl_vs: str = ""  # str to denote model run being logged.
+    with open(f'./search_engine/cache/search_index_{fl_vs}.json', 'w') as f:
         json_serializable_index = {index_str: list(set_ints) for index_str, set_ints in search_index.index.items()}
         json.dump(json_serializable_index, f, indent=4)
-    with open('./search_engine/cache/documents.json', 'w') as f:
+    with open(f'./search_engine/cache/documents_{fl_vs}.json', 'w') as f:
         json.dump([[doc.ID, doc.title, doc.abstract, doc.url] for doc in search_index.documents.values()], f, indent=4)
 
 ## Example searches
-    # search_index.search('London Beer Flood', search_type='AND')
+    search_index.search('London Beer Flood', search_type='AND')
     # search_index.search('London Beer Flood', search_type='OR')
     # search_index.search('London Beer Flood', search_type='AND', rank=True)
     # search_index.search('London Beer Flood', search_type='OR', rank=True)
