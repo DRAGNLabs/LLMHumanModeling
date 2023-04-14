@@ -19,6 +19,6 @@ temp/
 
 # ignore pycache
 __pycache__
-/search_engine/cache/
+/search_engine/cache
 
 /ignore
