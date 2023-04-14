@@ -1,3 +1,4 @@
+import tempfile
 import torch
 from transformers import (
     Trainer,
@@ -8,8 +9,9 @@ from transformers import (
     DataCollatorForLanguageModeling,
 )
 
-def train_transformer_model(
+def train_model(
     model: PreTrainedModel,
+    tokenizer: AutoTokenizer,
     text: str,
     training_args: TrainingArguments = TrainingArguments(
         "test-trainer",
@@ -17,16 +19,13 @@ def train_transformer_model(
     block_size: int = 1024,
 ):
     # # Save the input text to a file
-    # with open("input_text.txt", "w") as f:
-    #     f.write(text)
-
-    # Load the tokenizer using the model's name
-    tokenizer = AutoTokenizer.from_pretrained(model.name_or_path)
+    temp_dir = tempfile.TemporaryDirectory()
+    temp_file_path = temp_dir.name + "/input_text.txt"
 
     # Create a dataset from the input text
     dataset = TextDataset(
         tokenizer=tokenizer,
-        file_path="input_text.txt",
+        file_path=temp_file_path,
         block_size=block_size,
     )
 
@@ -45,6 +44,8 @@ def train_transformer_model(
 
     # Train the model
     trainer.train()
+    
+    temp_dir.cleanup()
 
     # Save the trained model
     model.save_pretrained("trained_model")

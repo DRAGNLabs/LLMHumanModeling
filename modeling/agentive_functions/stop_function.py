@@ -8,9 +8,9 @@ def sigmoid(x):
             )
         )
 
-def stop_training(model, tokenizer, text: str, ideal_ppl: float = 25) -> float:
+def stop_training(model, tokenizer = None, text: str = None, tokens = None, ideal_ppl: float = 25) -> float:
     # Calculate the perplexity of the model on the given text
-    model_ppl = get_ppl(model, tokenizer, text)
+    model_ppl = get_ppl(model, tokens=tokens)
 
     # Find the absolute difference between the model's and the ideal perplexity
     diff = abs(model_ppl - ideal_ppl)

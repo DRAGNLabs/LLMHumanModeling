@@ -13,8 +13,8 @@ device = "cpu"
 # test = load_dataset("wikitext", "wikitext-2-raw-v1", split="test")
 # encodings = tokenizer("\n\n".join(test["text"]), return_tensors="pt")
 
-def get_ppl(model, tokenizer, text) -> float:
-    encodings = tokenizer(text, return_tensors="pt")
+def get_ppl(model, tokenizer = None, text = None, tokens = None) -> float:
+    encodings = tokens if tokens else tokenizer(text, return_tensors="pt")
     
     max_length = model.config.n_positions
     stride = 50
