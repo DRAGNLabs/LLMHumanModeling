@@ -7,7 +7,7 @@ import os
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 print("Loading tokenizer and model...")
-checkpoint = "distilbert-base-uncased"
+checkpoint = "distilbert-base-uncased"  # shoud be fluid, start as base, moves to checkpoint
 tokenizer = AutoTokenizer.from_pretrained(checkpoint)
 model = AutoModelForSequenceClassification.from_pretrained(checkpoint, num_labels=2)
 print("Moving model to GPU...")
