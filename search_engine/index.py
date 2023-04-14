@@ -3,6 +3,7 @@ from .wiki_class import Abstract
 from .timing import timing
 from . import analysis
 from collections import defaultdict
+import random
 class Index:
     def __init__(self, documents:dict[int, Abstract] = {}, index:dict[str, set[int]] = {}):
         self.index: dict = {} if len(index) == 0 else index  # k(type):v(type)  == token(str) : doc_ids(list[int])
@@ -70,11 +71,11 @@ class Index:
             results.append((document, score))
         return sorted(results, key=lambda doc: doc[1], reverse=True)
     
-    def get_rand_doc(self, percent:float=1.0)-> str:
+    def get_rand_doc(self, percent:float=1.0)-> Abstract:
         """ percent: float [0, 1] -> e.g. .2, .5 """
 
         cap = len(self.documents) 
-        r_idx = (1, cap-1)  # cap-1 bc randint "includes both endpoints."
+        r_idx = random.randint(1, cap-1)  # cap-1 bc randint "includes both endpoints."
         abs_2_return = self.documents[r_idx]  # a wiki_class abstract
 
         ## Update index.log attribute

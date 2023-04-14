@@ -18,7 +18,7 @@ def index_documents(documents, index: Index)-> Index:
             print(f'Indexed {i} documents', end='\r')
     return index
 
-def do_all():
+def create_wiki_index():
     # this will only download the xml dump if you don't have a copy already;
     # just delete the file if you want a fresh copy
     if not os.path.exists('./data/wiki/enwiki-latest-abstract.xml.gz'):
@@ -50,9 +50,7 @@ def do_all():
         with open(f'./search_engine/cache/documents.json', 'w') as f:
             json.dump([[doc.ID, doc.title, doc.abstract, doc.url] for doc in search_index.documents.values()], f, indent=4)
     
-    abs_2_search = search_index.get_rand_doc()
-    
-    return abs_2_search
+    return search_index
 
 ## Example searches
     search_index.search('London Beer Flood', search_type='AND')

@@ -33,7 +33,7 @@ def scrape_wikipedia_article(url):
             extraneous_info["tables"].append(table.text)
 
     return {
-        "article_body": article_body,
+        "body": article_body,
         "citations": citations,
         "extraneous_info": extraneous_info,
     }
