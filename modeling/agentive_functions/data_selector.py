@@ -16,3 +16,8 @@ def update_log(Abs: Abstract)-> bool:
     #  It worked
             #return True
     # return false
+    file_path = "travel_log.txt"
+    t_f = "True" if Abs.used else "False"
+    with open(file_path, mode='a', encoding='utf8') as outf:
+        str_to_log = f"\n File_ID: {Abs.ID}, File Used: {t_f}" 
+        outf.write(str_to_log)
