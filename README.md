@@ -12,3 +12,4 @@ To learn about the project, or refer back to notes, go to the project's external
 7. D: function to jump back to either 4 & 5 or 2 (Function S)
 8. ~~D: Function to log visited files,~~ perplexity levels
 
+# Refactor structure so run_search_engine is within modeling
