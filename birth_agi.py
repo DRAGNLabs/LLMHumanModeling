@@ -1,4 +1,4 @@
-from modeling.utils import scrape_wikipedia_article
+from modeling.utils.scrape_wikipedia_article import scrape_wikipedia_article
 from run_search_engine import do_all
 
 abs = do_all()  # Abstract object
