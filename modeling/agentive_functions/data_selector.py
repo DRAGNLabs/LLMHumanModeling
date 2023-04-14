@@ -11,13 +11,12 @@ def next_corpus(loaded_index : Index)-> tuple(str, Abstract):
     # print(article["body"][:100])  # test print
     return (article_txt, article_abs)
 
-def update_log(Abs: Abstract)-> bool:
+def update_log(Abs: Abstract, len_article:int, len_read:int )-> bool:
     """ Use an abstract update the log."""
     #  It worked
             #return True
     # return false
-    file_path = "travel_log.txt"
-    t_f = "True" if Abs.used else "False"
+    file_path = "travel_log.txt"    
     with open(file_path, mode='a', encoding='utf8') as outf:
-        str_to_log = f"\n File_ID: {Abs.ID}, File Used: {t_f}" 
+        str_to_log = f"\n File_ID: {Abs.ID}, File Used: {len_read/len_article}; ({len_read}/{len_article})." 
         outf.write(str_to_log)

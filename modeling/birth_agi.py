@@ -12,7 +12,7 @@ from search_engine.wiki_class import Abstract
 from agentive_functions.stop_function import stop_training as func_f
 from agentive_functions.llm_functions.train import train_model
 from agentive_functions.llm_functions.extract_tokens import extract_n_tokens
-from agentive_functions.data_selector import next_corpus
+from agentive_functions.data_selector import next_corpus, update_log
 from random import random
 import argparse
 
@@ -46,3 +46,4 @@ while True:
     if not stop:
         train_model(model, tokenizer, training_text)
         did_training = True
+    update_log(article_abs)
