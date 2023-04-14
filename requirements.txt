@@ -61,3 +61,4 @@ wsproto==1.2.0
 xxhash==3.0.0
 yarl==1.8.1
 scoping==0.1.2
+bs4==0.0.1
