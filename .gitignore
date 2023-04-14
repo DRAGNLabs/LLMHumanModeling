@@ -14,10 +14,11 @@ temp/
 # ignore pretrained
 /pretrained
 
-
-
 # ignore downloaded wiki data
 /data/wiki/
 
 # ignore pycache
 __pycache__
+search_engine/cache/search_index.json
+search_engine/cache/documents.json
+
