@@ -71,24 +71,22 @@ class Index:
             results.append((document, score))
         return sorted(results, key=lambda doc: doc[1], reverse=True)
     
-    def get_rand_doc(self, percent:float=1.0)-> Abstract:
+    def update_index_log(percent):
+        curr_perc = self.log[r_idx] % 1
+        if curr_perc+percent <= 1:
+            abs_txt = abs_2_return.get_abs_percent(curr_perc, percent)
+        else:  # wrap around and grab the beginning again
+            left_overs = percent - (1 - curr_perc)
+            abs_txt = abs_2_return.getabs_percent(curr_perc, 1.0)
+            abs_text += abs_2_return.getabs_percent(0.0, left_overs)
+        self.log[r_idx] += percent
+    
+    def get_rand_doc(self, percent:float = 1.0)-> Abstract:
         """ percent: float [0, 1] -> e.g. .2, .5 """
 
         cap = len(self.documents) 
         r_idx = random.randint(1, cap-1)  # cap-1 bc randint "includes both endpoints."
         abs_2_return = self.documents[r_idx]  # a wiki_class abstract
-
-        ## Update index.log attribute
-
-        # curr_perc = self.log[r_idx] % 1
-        # if curr_perc+percent <= 1:
-        #     abs_txt = abs_2_return.get_abs_percent(curr_perc, percent)
-        # else:  # wrap around and grab the beginning again
-        #     left_overs = percent - (1 - curr_perc)
-        #     abs_txt = abs_2_return.getabs_percent(curr_perc, 1.0)
-        #     abs_text += abs_2_return.getabs_percent(0.0, left_overs)
-        # self.log[r_idx] += percent
-        
+        # update_index_log(percent) # update index.log attribute        
         return abs_2_return
-
     
