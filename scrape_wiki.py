@@ -11,7 +11,8 @@ response = requests.get(url)
 # parse the HTML content of the page using BeautifulSoup
 soup = BeautifulSoup(response.content, 'html.parser')
 
-# find the main content of the article (usually contained in a <div> element with the id "mw-content-text")
+# find the main
+# content of the article (usually contained in a <div> element with the id "mw-content-text")
 content_div = soup.find('div', {'id': 'mw-content-text'})
 
 # remove any boilerplate formatting from the scraped text
