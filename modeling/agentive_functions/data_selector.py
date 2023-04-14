@@ -4,7 +4,7 @@ from search_engine.wiki_class import Abstract
 
 
 
-def next_training_doc(loaded_index : Index)-> tuple(str, Abstract):
+def next_corpus(loaded_index : Index)-> tuple(str, Abstract):
     """Get text for random Index document. """
     article_abs = loaded_index.get_rand_doc()
     article_txt = scrape_wikipedia_article(article_abs.url)
@@ -16,3 +16,8 @@ def update_log(Abs: Abstract)-> bool:
     #  It worked
             #return True
     # return false
+    file_path = "travel_log.txt"
+    t_f = "True" if Abs.used else "False"
+    with open(file_path, mode='a', encoding='utf8') as outf:
+        str_to_log = f"\n File_ID: {Abs.ID}, File Used: {t_f}" 
+        outf.write(str_to_log)
