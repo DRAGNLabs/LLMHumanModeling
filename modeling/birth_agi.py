@@ -12,6 +12,7 @@ from search_engine.wiki_class import Abstract
 from agentive_functions.stop_function import stop_training as func_f
 from agentive_functions.llm_functions.train import train_model
 from agentive_functions.llm_functions.extract_tokens import extract_n_tokens
+from agentive_functions.data_selector import next_corpus
 from random import random
 import argparse
 
