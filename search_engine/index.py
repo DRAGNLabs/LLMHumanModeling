@@ -80,6 +80,7 @@ class Index:
             abs_txt = abs_2_return.getabs_percent(curr_perc, 1.0)
             abs_text += abs_2_return.getabs_percent(0.0, left_overs)
         self.log[r_idx] += percent
+        return abs_txt
     
     def get_rand_doc(self, percent:float = 1.0)-> Abstract:
         """ percent: float [0, 1] -> e.g. .2, .5 """
