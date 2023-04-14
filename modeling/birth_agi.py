@@ -21,8 +21,9 @@ argparser.add_argument('--seed', type=int, default=0)
 argparser.add_argument('--checkpoint', type=str, default=None)
 cli_args = argparser.parse_args()
 
-model = AutoModelForCausalLM.from_pretrained(cli_args.checkpoint)
-tokenizer = AutoTokenizer.from_pretrained(cli_args.checkpoint)
+checkpoint = cli_args.checkpoint if cli_args.checkpoint != None else "gpt2"
+model = AutoModelForCausalLM.from_pretrained(checkpoint)
+tokenizer = AutoTokenizer.from_pretrained(checkpoint)
 
 wiki_index = create_wiki_index()
 
