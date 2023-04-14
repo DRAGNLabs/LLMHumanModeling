@@ -73,7 +73,7 @@ class Index:
     def get_rand_doc(self, percent:float=1.0)-> str:
         """ percent: float [0, 1] -> e.g. .2, .5 """
 
-        cap = len(self.documents, percent) 
+        cap = len(self.documents) 
         r_idx = (1, cap-1)  # cap-1 bc randint "includes both endpoints."
         abs_2_return = self.documents[r_idx]  # a wiki_class abstract
 
