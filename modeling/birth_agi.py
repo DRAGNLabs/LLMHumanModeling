@@ -47,4 +47,4 @@ while True:
     if not stop:
         train_model(model, tokenizer, training_text)
         did_training = True
-    update_log(article_abs)
+    update_log(article_abs, len(article), len(article_remaining))
