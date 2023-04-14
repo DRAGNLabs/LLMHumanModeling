@@ -71,7 +71,7 @@ class Index:
             results.append((document, score))
         return sorted(results, key=lambda doc: doc[1], reverse=True)
     
-    def update_index_log(percent):
+    def update_index_log(self, percent):
         curr_perc = self.log[r_idx] % 1
         if curr_perc+percent <= 1:
             abs_txt = abs_2_return.get_abs_percent(curr_perc, percent)
@@ -79,6 +79,7 @@ class Index:
             left_overs = percent - (1 - curr_perc)
             abs_txt = abs_2_return.getabs_percent(curr_perc, 1.0)
             abs_text += abs_2_return.getabs_percent(0.0, left_overs)
+        
         self.log[r_idx] += percent
 
     
