@@ -1,5 +1,5 @@
 import gzip
-from lxml import etree  # Can't find this package; pip install lxml?
+import lxml 
 from time import time
 
 from . import wiki_class  # local .py file
@@ -11,7 +11,7 @@ def load_documents()-> wiki_class.Abstract:
         doc_id = 1
         # iterparse will yield the entire `doc` element once it finds the
         # closing `</doc>` tag
-        for _, element in etree.iterparse(f, events=('end',), tag='doc'):
+        for _, element in lxml.etree.iterparse(f, events=('end',), tag='doc'):
             title = element.findtext('./title')
             url = element.findtext('./url')
             abstract = element.findtext('./abstract')
