@@ -5,7 +5,6 @@ from utils.scrape_wikipedia_article import scrape_wikipedia_article
 # some_file.py
 import sys
 # caution: path[0] is reserved for script path (or '' in REPL)
-sys.path.insert(1, '../')
 from search_engine.run_search_engine import create_wiki_index
 from search_engine.wiki_class import Abstract
 
