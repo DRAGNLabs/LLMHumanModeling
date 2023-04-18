@@ -2,13 +2,14 @@ import json
 import os.path
 # import requests
 
-from search_engine.get_wikimedia import download_wiki_abstracts
-from search_engine.build_wiki_objects import load_documents
-from search_engine.timing import timing
-from search_engine.index import Index
-from search_engine.wiki_class import Abstract
+from .get_wikimedia import download_wiki_abstracts
+from .build_wiki_objects import load_documents
+from .timing import timing
+from .index import Index
+from .wiki_class import Abstract
 from scoping import scoping
 
+PERSISTENT_DIR = '../'
 
 @timing
 def index_documents(documents, index: Index)-> Index:
@@ -21,7 +22,7 @@ def index_documents(documents, index: Index)-> Index:
 def create_wiki_index():
     # this will only download the xml dump if you don't have a copy already;
     # just delete the file if you want a fresh copy
-    if not os.path.exists('./data/wiki/enwiki-latest-abstract.xml.gz'):
+    if not os.path.exists(os.path.join(PERSISTENT_DIR, './data/wiki/enwiki-latest-abstract.xml.gz')):
         download_wiki_abstracts()
 
     search_index: Index  # Declare var for 'scoping()' funtion
