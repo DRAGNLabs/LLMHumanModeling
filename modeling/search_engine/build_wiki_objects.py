@@ -8,10 +8,11 @@ from . import wiki_class  # local .py file
 MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
 PERSISTENT_DIR = os.path.join(MODULE_DIR, '../../')
 
-def load_documents()-> wiki_class.Abstract:
+def load_documents(truncate=True)-> wiki_class.Abstract:
     start = time()
     # open a filehandle to the gzipped Wikipedia dump
-    with gzip.open(os.path.join(PERSISTENT_DIR, './data/wiki/enwiki-latest-abstract.xml.gz'), 'rb') as f:
+    trunc = "truncated_" if truncate else ""
+    with gzip.open(os.path.join(PERSISTENT_DIR, f'./data/wiki/{trunc}enwiki-latest-abstract.xml.gz'), 'rb') as f:
         doc_id = 1
         # iterparse will yield the entire `doc` element once it finds the
         # closing `</doc>` tag
