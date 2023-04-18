@@ -1,3 +1,5 @@
+import os
+import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from utils.scrape_wikipedia_article import scrape_wikipedia_article
 
@@ -24,6 +26,15 @@ checkpoint = cli_args.checkpoint if cli_args.checkpoint != None else "gpt2"
 model = AutoModelForCausalLM.from_pretrained(checkpoint)
 tokenizer = AutoTokenizer.from_pretrained(checkpoint)
 
+# device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+# Set CUDA_VISIBLE_DEVICES to an empty string
+device_str = "cpu"
+device = torch.device(device_str)
+if device_str == "cpu":
+    os.environ['CUDA_VISIBLE_DEVICES'] = ''
+
+model = model.to(device)
+
 wiki_index = create_wiki_index()
 
 loop_count = 0
@@ -46,7 +57,7 @@ while True:
     
     training_tokens, training_text, article_remaining = extract_n_tokens(article_remaining, 1024, tokenizer)
     
-    probability_of_stopping = func_f(model, tokens=training_tokens)
+    probability_of_stopping = func_f(model, tokenizer, training_text, device=device)
     stop = random() < probability_of_stopping
     
     print(f"Probability of stopping: {probability_of_stopping}, stop: {stop}")

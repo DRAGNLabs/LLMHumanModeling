@@ -1,59 +1,50 @@
-import tempfile
 import torch
+from torch.utils.data import Dataset
 from transformers import (
-    Trainer,
-    TrainingArguments,
-    AutoTokenizer,
     PreTrainedModel,
-    TextDataset,
+    AutoTokenizer,
+    TrainingArguments,
+    Trainer,
     DataCollatorForLanguageModeling,
 )
+
+class TextDataset(Dataset):
+    def __init__(self, tokenizer: AutoTokenizer, text: str, block_size: int = 1024):
+        self.tokenizer = tokenizer
+        self.block_size = block_size
+
+        self.examples = tokenizer(text, return_tensors='pt', padding=False)['input_ids']
+
+    def __len__(self):
+        return len(self.examples)
+
+    def __getitem__(self, i):
+        return self.examples[i]
 
 def train_model(
     model: PreTrainedModel,
     tokenizer: AutoTokenizer,
     text: str,
-    training_args: TrainingArguments = TrainingArguments(
-        "test-trainer",
-    ),
+    training_args: TrainingArguments = None,
     block_size: int = 1024,
 ):
-    # # Save the input text to a file
-    temp_dir = tempfile.TemporaryDirectory()
-    temp_file_path = temp_dir.name + "/input_text.txt"
+    training_args = TrainingArguments(
+        "test-trainer",
+    ),
+    
+    dataset = TextDataset(tokenizer, text, block_size)
 
-    # Create a dataset from the input text
-    dataset = TextDataset(
-        tokenizer=tokenizer,
-        file_path=temp_file_path,
-        block_size=block_size,
-    )
-
-    # Create a data collator for language modeling
     data_collator = DataCollatorForLanguageModeling(
-        tokenizer=tokenizer, mlm=True, mlm_probability=0.15
+        tokenizer=tokenizer, mlm=False
     )
 
-    # Create the trainer
     trainer = Trainer(
         model=model,
-        args=training_args,
+        # args=training_args,
         train_dataset=dataset,
         data_collator=data_collator,
     )
 
-    # Train the model
     trainer.train()
-    
-    temp_dir.cleanup()
 
-    # Save the trained model
-    model.save_pretrained("trained_model")
-
-# Example usage:
-# from transformers import AutoModelForMaskedLM
-
-# model = AutoModelForMaskedLM.from_pretrained("distilbert-base-uncased")
-# text = "This is a sample text for training the model."
-
-# train_transformer_model(model, text)
+    return model
