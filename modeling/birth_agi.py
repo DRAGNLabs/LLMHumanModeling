@@ -38,7 +38,7 @@ while True:
         article, article_abs = next_corpus(wiki_index)
         article_remaining = article
     
-    training_tokens, training_text, article_remaining = extract_n_tokens(article_remaining, 1024)
+    training_tokens, training_text, article_remaining = extract_n_tokens(article_remaining, 1024, tokenizer)
     
     probability_of_stopping = func_f(model, tokens=training_tokens)
     stop = random() < probability_of_stopping
