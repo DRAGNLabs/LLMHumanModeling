@@ -1,5 +1,5 @@
 import torch
-from llm_functions.perplexity import get_ppl
+from .llm_functions.perplexity import get_ppl
 
 def sigmoid(x):
     return 1 / (
