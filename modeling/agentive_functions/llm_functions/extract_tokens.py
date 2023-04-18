@@ -16,5 +16,4 @@ def extract_n_tokens(text: str, n: int, tokenizer: AutoTokenizer) -> tuple[list[
     input_text = tokenizer.decode(n_tokens)
 
     # Return the extracted tokens and truncated text
-    return tuple(n_tokens, input_text, truncated_text)
-    
+    return tuple([n_tokens, input_text, truncated_text])

@@ -26,24 +26,34 @@ tokenizer = AutoTokenizer.from_pretrained(checkpoint)
 
 wiki_index = create_wiki_index()
 
+loop_count = 0
 did_training: bool = False
 article_abs: Abstract
 article: str
 article_remaining: str
 
 while True:
+    print(f"Loop Count: {loop_count}")
     if did_training and not article_remaining == "":
         did_training = False
+        print(f"Continuing article: {article_abs.title} ({article_abs.ID}), {len(article_remaining)}/{len(article)} remaining.")
     else:
         article, article_abs = next_corpus(wiki_index)
         article_remaining = article
+        print(f"Pulling new article: {article_abs.title} ({article_abs.ID}), {len(article_remaining)}/{len(article)} remaining.")
+    
+    print(article_remaining)
     
     training_tokens, training_text, article_remaining = extract_n_tokens(article_remaining, 1024, tokenizer)
     
     probability_of_stopping = func_f(model, tokens=training_tokens)
     stop = random() < probability_of_stopping
     
+    print(f"Probability of stopping: {probability_of_stopping}, stop: {stop}")
+    
     if not stop:
         train_model(model, tokenizer, training_text)
         did_training = True
+        print(f"Trained model on {len(training_text)} tokens.")
     update_log(article_abs, len(article), len(article_remaining))
+    loop_count += 1
