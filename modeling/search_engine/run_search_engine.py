@@ -33,7 +33,8 @@ def create_wiki_index():
 
     search_index: Index  # Declare var for 'scoping()' funtion
     with scoping(): # Loads indexes and documents from cache if they exist, otherwise creates them
-        print(join_module_path('cache/index.json'))
+        print(f"\nChecking index.json exists: {os.path.exists(join_module_path('cache/index.json'))}")
+        print(f"Checking documents.json exists: {os.path.exists(join_module_path('cache/documents.json'))}\n")
         if os.path.exists(join_module_path('cache/index.json')) and os.path.exists(join_module_path('cache/documents.json')):  # Load existing index
             raw_indexes: dict = json.load(open(join_module_path('cache/index.json')))
             raw_documents: list = json.load(open(join_module_path('cache/documents.json')))
