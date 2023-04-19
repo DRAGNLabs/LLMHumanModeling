@@ -53,7 +53,7 @@ while True:
         article_remaining = article
         print(f"Pulling new article: {article_abs.title} ({article_abs.ID}), {len(article_remaining)}/{len(article)} remaining.")
     
-    print(article_remaining)
+    # print(article_remaining)
     
     training_tokens, training_text, article_remaining = extract_n_tokens(article_remaining, 1024, tokenizer)
     

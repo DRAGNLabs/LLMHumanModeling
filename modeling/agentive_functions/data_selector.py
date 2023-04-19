@@ -1,5 +1,3 @@
-import sys
-print(sys.path)
 from utils.scrape_wikipedia_article import scrape_wikipedia_article
 from search_engine.index import Index
 from search_engine.wiki_class import Abstract
