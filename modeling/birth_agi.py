@@ -52,15 +52,13 @@ while True:
         article, article_abs = next_corpus(wiki_index)
         article_remaining = article
         print(f"Pulling new article: {article_abs.title} ({article_abs.ID}), {len(article_remaining)}/{len(article)} remaining.")
-    
-    # print(article_remaining)
-    
+        
     training_tokens, training_text, article_remaining = extract_n_tokens(article_remaining, 1024, tokenizer)
     
     probability_of_stopping = func_f(model, tokenizer, training_text, device=device)
     stop = random() < probability_of_stopping
     
-    print(f"Probability of stopping: {probability_of_stopping}, stop: {stop}")
+    print(f"\nProbability of stopping: {round(probability_of_stopping, 3)}, \nStop: {stop}\n")
     
     if not stop:
         train_model(model, tokenizer, training_text)
