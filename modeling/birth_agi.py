@@ -46,7 +46,7 @@ article_remaining: str
 while True:  # infinite loop
     print(f"Loop Count: {loop_count}")
 
-
+    # Select more training data
     if did_training and not article_remaining == "":  # Check for remaining article
         did_training = False
         print(f"Continuing article: {article_abs.title} ({article_abs.ID}), {len(article_remaining)}/{len(article)} remaining.")
@@ -57,15 +57,17 @@ while True:  # infinite loop
         
     training_tokens, training_text, article_remaining = extract_n_tokens(article_remaining, 1024, tokenizer)
     
+    # Assess use of sub corpus
     probability_of_stopping = stop_or_continue(model, tokenizer, training_text, device=device)
     stop = random() < probability_of_stopping
-    
     print(f"\nProbability of stopping: {round(probability_of_stopping, 3)}, \nStop: {stop}\n")
     
+    # Train (stop == False)
     if not stop:
         train_model(model, tokenizer, training_text)
         did_training = True
         print(f"Trained model on {len(training_text)} tokens.")
 
+    # Update training log
     update_log(article_abs, len(article), len(article_remaining))  # default writes to .txt
     loop_count += 1
