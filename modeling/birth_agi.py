@@ -35,6 +35,7 @@ if device_str == "cpu":
 
 model = model.to(device)
 
+# Load search index object from scratch or from json; truncated, by default.
 wiki_index = create_wiki_index()
 
 loop_count = 0
@@ -54,7 +55,8 @@ while True:  # infinite loop
         article, article_abs = next_corpus(wiki_index)
         article_remaining = article
         print(f"Pulling new article: {article_abs.title} ({article_abs.ID}), {len(article_remaining)}/{len(article)} remaining.")
-        
+
+    # Run tokenizer    
     training_tokens, training_text, article_remaining = extract_n_tokens(article_remaining, 1024, tokenizer)
     
     # Assess use of sub corpus
