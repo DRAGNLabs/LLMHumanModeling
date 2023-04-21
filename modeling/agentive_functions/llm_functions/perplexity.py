@@ -11,8 +11,12 @@ from tqdm import tqdm
 # test = load_dataset("wikitext", "wikitext-2-raw-v1", split="test")
 # encodings = tokenizer("\n\n".join(test["text"]), return_tensors="pt")
 
-def get_ppl(model, tokenizer = None, text = None, tokens = None, device = torch.device("cuda" if torch.cuda.is_available() else "cpu")) -> float:
-    encodings = tokens if tokens else tokenizer(text, return_tensors="pt")
+def get_ppl(model, tokenizer = None, text:str = "", tokens = None, device = torch.device("cuda" if torch.cuda.is_available() else "cpu")) -> float: # FIXME: Why do we even pass in this argument?  
+    
+    try:
+        encodings = tokens if tokens else tokenizer(text, return_tensors="pt")
+    except TypeError as e:
+        raise Exception(f"\n\n{e}.\nThere was no tokenzer given to assess perplexity.\n")
     
     max_length = model.config.n_positions
     stride = 50

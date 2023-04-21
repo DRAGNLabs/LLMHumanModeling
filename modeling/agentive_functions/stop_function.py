@@ -1,10 +1,10 @@
-import math
+from math import exp as mathExp
 from .llm_functions.perplexity import get_ppl
 
 def sigmoid(x):
     """A sigmoid-esque function created through roughly gauging WolfRam Alpha visualizations"""
     return 1 / (
-        1 + math.exp(
+        1 + mathExp(
             -((x-5)/1.8)
             )
         )
