@@ -10,7 +10,7 @@ import sys
 from search_engine.run_search_engine import create_wiki_index
 from search_engine.wiki_class import Abstract
 
-from agentive_functions.stop_function import stop_training as func_f
+from agentive_functions.stop_function import stop_or_continue 
 from agentive_functions.llm_functions.train import train_model
 from agentive_functions.llm_functions.extract_tokens import extract_n_tokens
 from agentive_functions.data_selector import next_corpus, update_log
@@ -43,19 +43,21 @@ article_abs: Abstract
 article: str
 article_remaining: str
 
-while True:
+while True:  # infinite loop
     print(f"Loop Count: {loop_count}")
-    if did_training and not article_remaining == "":
+
+
+    if did_training and not article_remaining == "":  # Check for remaining article
         did_training = False
         print(f"Continuing article: {article_abs.title} ({article_abs.ID}), {len(article_remaining)}/{len(article)} remaining.")
-    else:
+    else:  # Grab new article
         article, article_abs = next_corpus(wiki_index)
         article_remaining = article
         print(f"Pulling new article: {article_abs.title} ({article_abs.ID}), {len(article_remaining)}/{len(article)} remaining.")
         
     training_tokens, training_text, article_remaining = extract_n_tokens(article_remaining, 1024, tokenizer)
     
-    probability_of_stopping = func_f(model, tokenizer, training_text, device=device)
+    probability_of_stopping = stop_or_continue(model, tokenizer, training_text, device=device)
     stop = random() < probability_of_stopping
     
     print(f"\nProbability of stopping: {round(probability_of_stopping, 3)}, \nStop: {stop}\n")
@@ -64,5 +66,6 @@ while True:
         train_model(model, tokenizer, training_text)
         did_training = True
         print(f"Trained model on {len(training_text)} tokens.")
-    update_log(article_abs, len(article), len(article_remaining))
+
+    update_log(article_abs, len(article), len(article_remaining))  # default writes to .txt
     loop_count += 1
