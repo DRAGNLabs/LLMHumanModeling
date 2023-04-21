@@ -10,7 +10,7 @@ def sigmoid(x):
         )
 
 def stop_or_continue(model, tokenizer = None, text: str = None, tokens = None, ideal_ppl: float = 25, device = None) -> float:
-    """Calculate probability of stopping training on a given text."""
+    """Calculate probability of stopping training on a given text; higher is more likely"""
     
     # Calculate the perplexity of the model on the given text
     model_ppl = get_ppl(model, tokenizer, text, device=device)
