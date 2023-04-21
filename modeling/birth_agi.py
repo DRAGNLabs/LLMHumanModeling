@@ -47,6 +47,7 @@ article_remaining: str
 while True:  # infinite loop
     print(f"Loop Count: {loop_count}")
     model = AutoModelForCausalLM.from_pretrained(checkpoint).to(device)
+    print(f"\n{model.device}\n")  # Verify model's device
 
 
     # Select more training data
@@ -68,7 +69,8 @@ while True:  # infinite loop
     
     # Train (stop == False)
     if not stop:
-        train_model(model, tokenizer, training_text)
+        mod = train_model(model, tokenizer, training_text)
+        # print(mod.device)
         did_training = True
         print(f"Trained model on {len(training_text)} tokens.")
 
