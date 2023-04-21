@@ -50,7 +50,8 @@ def create_wiki_index(truncate=True):
 
     if not os.path.exists(join_module_path('cache/{trunc}index.json')) or not os.path.exists(join_module_path('cache/{trunc}documents.json')):
         
-        if not os.path.exists(join_module_path('cache')):  # Make a 'cache' directory
+        # Make a 'cache' directory
+        if not os.path.exists(join_module_path('cache')): 
             os.mkdir(join_module_path('cache'))
 
         # Store search_index as .json 
