@@ -2,8 +2,6 @@ import torch
 from tqdm import tqdm
 
 # from transformers import GPT2LMHeadModel, GPT2TokenizerFast
-
-device = "cpu"
 # model_id = "gpt2-large"
 # model = GPT2LMHeadModel.from_pretrained(model_id).to(device)
 # tokenizer = GPT2TokenizerFast.from_pretrained(model_id)
@@ -13,11 +11,12 @@ device = "cpu"
 # test = load_dataset("wikitext", "wikitext-2-raw-v1", split="test")
 # encodings = tokenizer("\n\n".join(test["text"]), return_tensors="pt")
 
-def get_ppl(model, tokenizer, text) -> float:
-    encodings = tokenizer(text, return_tensors="pt")
+def get_ppl(model, tokenizer = None, text = None, tokens = None, device = torch.device("cuda" if torch.cuda.is_available() else "cpu")) -> float:
+    encodings = tokens if tokens else tokenizer(text, return_tensors="pt")
     
     max_length = model.config.n_positions
     stride = 50
+    # print(encodings)
     seq_len = encodings.input_ids.size(1)
 
     nlls = []
@@ -46,3 +45,16 @@ def get_ppl(model, tokenizer, text) -> float:
 
     ppl = torch.exp(torch.stack(nlls).sum() / end_loc)
     return ppl.item()
+
+# # Units test
+# from transformers import AutoTokenizer
+# from transformers import AutoModelForCausalLM
+
+# model = AutoModelForCausalLM.from_pretrained("gpt2").to(device)
+# tokenizer = AutoTokenizer.from_pretrained("gpt2")
+
+# tests = ["Hello, my dog is cute", "The quick brown fox jumps over the lazy dog."]
+
+# for test in tests:
+#     print(f"Test: {test}")
+#     print(f"PPL: {get_ppl(model, tokenizer = tokenizer, text = test)}")
