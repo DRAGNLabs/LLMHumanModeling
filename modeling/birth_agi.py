@@ -46,6 +46,8 @@ article_remaining: str
 
 while True:  # infinite loop
     print(f"Loop Count: {loop_count}")
+    model = AutoModelForCausalLM.from_pretrained(checkpoint).to(device)
+
 
     # Select more training data
     if did_training and not article_remaining == "":  # Check for remaining article
