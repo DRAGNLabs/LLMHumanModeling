@@ -26,12 +26,12 @@ checkpoint = cli_args.checkpoint if cli_args.checkpoint != None else "gpt2"
 model = AutoModelForCausalLM.from_pretrained(checkpoint)
 tokenizer = AutoTokenizer.from_pretrained(checkpoint)
 
-# device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # Set CUDA_VISIBLE_DEVICES to an empty string
-device_str = "cpu"
-device = torch.device(device_str)
-if device_str == "cpu":
-    os.environ['CUDA_VISIBLE_DEVICES'] = ''
+# device_str = "cpu"
+# device = torch.device(device_str)
+# if device_str == "cpu":
+#     os.environ['CUDA_VISIBLE_DEVICES'] = ''
 
 model = model.to(device)
 
