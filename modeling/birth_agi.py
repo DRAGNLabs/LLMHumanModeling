@@ -50,11 +50,13 @@ while True:  # infinite loop
     # Select more training data
     if did_training and not article_remaining == "":  # Check for remaining article
         did_training = False
-        print(f"Continuing article: {article_abs.title} ({article_abs.ID}), {len(article_remaining)}/{len(article)} remaining.")
+        print(f"Continuing article: {article_abs.title} ({article_abs.ID}),\
+              {len(article_remaining)}/{len(article)} remaining.")
     else:  # Grab new article
         article, article_abs = next_corpus(wiki_index)
         article_remaining = article
-        print(f"Pulling new article: {article_abs.title} ({article_abs.ID}), {len(article_remaining)}/{len(article)} remaining.")
+        print(f"Pulling new article: {article_abs.title} ({article_abs.ID}),\
+               {len(article_remaining)}/{len(article)} remaining.")
 
     # Run tokenizer    
     training_tokens, training_text, article_remaining = extract_n_tokens(article_remaining, 1024, tokenizer)
