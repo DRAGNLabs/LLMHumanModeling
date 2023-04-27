@@ -1,7 +1,7 @@
 import math
 from .llm_functions.perplexity import get_ppl
 
-def sigmoid(x):
+def sigmoid(x):  #TODO: This is pretty steep. An abs. diff. of 10 is a 95% chance of rejection. Increase to 15 at least? 
     """A sigmoid-esque function created through roughly gauging WolfRam Alpha visualizations"""
     return 1 / (
         1 + math.exp(

@@ -73,6 +73,8 @@ while True:  # infinite loop
         # print(mod.device)
         did_training = True
         print(f"Trained model on {len(training_text)} tokens.")
+        ## calculate loss  https://github.com/alexcpn/tranformer_learn/blob/gpt-loss-learn/older/gpt2_loss_learn.py
+        # add to log file
 
     # Update training log
     update_log(article_abs, len(article), len(article_remaining))  # default writes to .txt
