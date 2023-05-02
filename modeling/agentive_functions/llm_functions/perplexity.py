@@ -16,7 +16,7 @@ def get_ppl(model, tokenizer = None, text = None, tokens = None, device = torch.
     
     max_length = model.config.n_positions
     stride = 50
-    print(encodings)
+    # print(encodings)
     seq_len = encodings.input_ids.size(1)
 
     nlls = []

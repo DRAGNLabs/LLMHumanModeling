@@ -8,7 +8,7 @@ def extract_n_tokens(text: str, n: int, tokenizer: AutoTokenizer) -> tuple[list[
     n_tokens = encoded_text[:n]
     n_tokens = tokenizer(tokenizer.decode(n_tokens))
     
-    print(n_tokens)
+    # print(n_tokens)
 
     # Decode the tokens back to text
     extracted_text = tokenizer.decode(n_tokens.input_ids)

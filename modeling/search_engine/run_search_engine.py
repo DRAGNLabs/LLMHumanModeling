@@ -46,11 +46,12 @@ def create_wiki_index(truncate=True):
             search_index = index_documents(load_documents(truncate=truncate), Index())
 
         print(f'Index contains {len(search_index.documents)} documents.')
-        scoping.keep('search_index') # passes search_index to the enclosing scope; otherwise the variable would refer to the uninitialized Index() object.
+        scoping.keep('search_index') # Pass search_index to the enclosing scope; otherwise the variable would refer to the uninitialized Index() object.
 
     if not os.path.exists(join_module_path('cache/{trunc}index.json')) or not os.path.exists(join_module_path('cache/{trunc}documents.json')):
         
-        if not os.path.exists(join_module_path('cache')):  # Make a 'cache' directory
+        # Make a 'cache' directory
+        if not os.path.exists(join_module_path('cache')): 
             os.mkdir(join_module_path('cache'))
 
         # Store search_index as .json 
