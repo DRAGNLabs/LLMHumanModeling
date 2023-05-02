@@ -2,9 +2,10 @@ from utils.scrape_wikipedia_article import scrape_wikipedia_article
 from search_engine.index import Index
 from search_engine.wiki_class import Abstract
 import csv
-from os.path import exists
+import os
 
-
+MODULE_DIR = os.path.dirname(os.path.abspath(__file__))
+PERSISTENT_DIR = os.path.join(MODULE_DIR, '../../')
 
 def next_corpus(loaded_index : Index)-> tuple[str, Abstract]:
     """Get text for random Index document. """
@@ -25,10 +26,12 @@ def update_log(Abs: Abstract, len_article:int, len_read:int, to_csv:bool=False, 
         except TypeError:  # 
             log_id = "_" + str(log_id)
 
+    travel_log_path = os.path.join(PERSISTENT_DIR, f'logs/travel_log_{log_id}')
+    
     if to_csv:  # Check optional 'csv' argument == True
-        file_path = f"travel_log{log_id}.csv"
+        file_path = travel_log_path + ".csv"
 
-        if not exists(file_path):
+        if not os.exists(file_path):
             headers = ["File ID", "Portion", "Fraction"]
             with open(file_path, mode='w', encoding='utf8') as csv_out:
                 writer = csv.writer(csv_out)
@@ -41,7 +44,7 @@ def update_log(Abs: Abstract, len_article:int, len_read:int, to_csv:bool=False, 
             
 
     else:
-        file_path = f"travel_log{log_id}.txt"    
+        file_path = travel_log_path + ".txt"  
         with open(file_path, mode='a', encoding='utf8') as outf:
             str_to_log = f"\n File_ID: {Abs.ID}, File Used: {len_read/len_article}; ({len_read}/{len_article})." 
             outf.write(str_to_log)

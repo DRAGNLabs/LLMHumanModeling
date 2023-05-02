@@ -22,4 +22,5 @@ __pycache__
 /modeling/search_engine/cache/
 
 /ignore
+/logs
 travel_log.txt
