@@ -28,6 +28,9 @@ def update_log(Abs: Abstract, len_article:int, len_read:int, to_csv:bool=False, 
 
     travel_log_path = os.path.join(PERSISTENT_DIR, f'logs/travel_log_{log_id}')
     
+    if not os.path.exists(os.path.dirname(travel_log_path)):
+        os.makedirs(os.path.dirname(travel_log_path))
+    
     if to_csv:  # Check optional 'csv' argument == True
         file_path = travel_log_path + ".csv"
 
